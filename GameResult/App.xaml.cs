@@ -1,68 +1,119 @@
-﻿using System;
+﻿using GameResultRt.Common;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
-namespace GameResult
+// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+
+namespace GameResultRt
 {
-  public partial class App : Application
+  /// <summary>
+  /// Provides application-specific behavior to supplement the default Application class.
+  /// </summary>
+  sealed partial class App : Application
   {
-
+    /// <summary>
+    /// Initializes the singleton application object.  This is the first line of authored code
+    /// executed, and as such is the logical equivalent of main() or WinMain().
+    /// </summary>
     public App()
     {
-      this.Startup += this.Application_Startup;
-      this.Exit += this.Application_Exit;
-      this.UnhandledException += this.Application_UnhandledException;
-
-      InitializeComponent();
+      this.InitializeComponent();
+      this.Suspending += OnSuspending;
     }
 
-    private void Application_Startup(object sender, StartupEventArgs e)
+    /// <summary>
+    /// Invoked when the application is launched normally by the end user.  Other entry points
+    /// will be used when the application is launched to open a specific file, to display
+    /// search results, and so forth.
+    /// </summary>
+    /// <param name="e">Details about the launch request and process.</param>
+    protected async override void OnLaunched(LaunchActivatedEventArgs e)
     {
-      this.RootVisual = new MainPage();
-    }
-
-    private void Application_Exit(object sender, EventArgs e)
-    {
-
-    }
-
-    private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
-    {
-      // If the app is running outside of the debugger then report the exception using
-      // the browser's exception mechanism. On IE this will display it a yellow alert 
-      // icon in the status bar and Firefox will display a script error.
-      if (!System.Diagnostics.Debugger.IsAttached)
+#if DEBUG
+      if (System.Diagnostics.Debugger.IsAttached)
       {
-
-        // NOTE: This will allow the application to continue running after an exception has been thrown
-        // but not handled. 
-        // For production applications this error handling should be replaced with something that will 
-        // report the error to the website and stop the application.
-        e.Handled = true;
-        Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });
+        this.DebugSettings.EnableFrameRateCounter = true;
       }
+#endif
+      Frame rootFrame = Window.Current.Content as Frame;
+
+      // Do not repeat app initialization when the Window already has content,
+      // just ensure that the window is active
+
+      if (rootFrame == null)
+      {
+        // Create a Frame to act as the navigation context and navigate to the first page
+        rootFrame = new Frame();
+        //Associate the frame with a SuspensionManager key                                
+        SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+        // Set the default language
+        rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+
+        rootFrame.NavigationFailed += OnNavigationFailed;
+
+        if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+        {
+          // Restore the saved session state only when appropriate
+          try
+          {
+            await SuspensionManager.RestoreAsync();
+          }
+          catch (SuspensionManagerException)
+          {
+            //Something went wrong restoring state.
+            //Assume there is no state and continue
+          }
+        }
+
+        // Place the frame in the current Window
+        Window.Current.Content = rootFrame;
+      }
+      if (rootFrame.Content == null)
+      {
+        // When the navigation stack isn't restored navigate to the first page,
+        // configuring the new page by passing required information as a navigation
+        // parameter
+        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+      }
+      // Ensure the current window is active
+      Window.Current.Activate();
     }
 
-    private void ReportErrorToDOM(ApplicationUnhandledExceptionEventArgs e)
+    /// <summary>
+    /// Invoked when Navigation to a certain page fails
+    /// </summary>
+    /// <param name="sender">The Frame which failed navigation</param>
+    /// <param name="e">Details about the navigation failure</param>
+    void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
     {
-      try
-      {
-        string errorMsg = e.ExceptionObject.Message + e.ExceptionObject.StackTrace;
-        errorMsg = errorMsg.Replace('"', '\'').Replace("\r\n", @"\n");
+      throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+    }
 
-        System.Windows.Browser.HtmlPage.Window.Eval("throw new Error(\"Unhandled Error in Silverlight Application " + errorMsg + "\");");
-      }
-      catch (Exception)
-      {
-      }
+    /// <summary>
+    /// Invoked when application execution is being suspended.  Application state is saved
+    /// without knowing whether the application will be terminated or resumed with the contents
+    /// of memory still intact.
+    /// </summary>
+    /// <param name="sender">The source of the suspend request.</param>
+    /// <param name="e">Details about the suspend request.</param>
+    private async void OnSuspending(object sender, SuspendingEventArgs e)
+    {
+      var deferral = e.SuspendingOperation.GetDeferral();
+      await SuspensionManager.SaveAsync();
+      deferral.Complete();
     }
   }
 }

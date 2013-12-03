@@ -1,13 +1,20 @@
 ﻿using System;
-using System.Windows.Media;
-using System.Windows.Data;
+using Windows.UI;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 
-namespace GameResult
+namespace GameResultRt
 {
   public class DieConverter : IValueConverter
   {
 
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+      throw new NotImplementedException();
+    }
+
+    public object Convert(object value, Type targetType, object parameter, string language)
     {
       var die = (int)value;
       Color result = Colors.Black;
@@ -26,7 +33,7 @@ namespace GameResult
       return new SolidColorBrush(result);
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
       throw new NotImplementedException();
     }

@@ -1,12 +1,19 @@
 ﻿using System;
-using System.Windows.Media;
-using System.Windows.Data;
+using Windows.UI;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 
-namespace GameResult
+namespace GameResultRt
 {
   public class RvConverter : IValueConverter
   {
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+      throw new NotImplementedException();
+    }
+
+    public object Convert(object value, Type targetType, object parameter, string language)
     {
       var rv = (int)value;
       Color result;
@@ -33,7 +40,7 @@ namespace GameResult
       return new SolidColorBrush(result);
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
       throw new NotImplementedException();
     }
@@ -41,7 +48,13 @@ namespace GameResult
 
   public class RvLabelConverter : IValueConverter
   {
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+      throw new NotImplementedException();
+    }
+
+    public object Convert(object value, Type targetType, object parameter, string language)
     {
       var rv = (int)value;
       var rvs = Calculator.RVs(rv).ToString();
@@ -71,7 +84,7 @@ namespace GameResult
       return result;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
       throw new NotImplementedException();
     }
