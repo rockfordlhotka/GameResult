@@ -6,15 +6,7 @@
 
   <Application.Resources>
     <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-
-        <!-- 
-                    Styles that define common aspects of the platform look and feel
-                    Required by Visual Studio project and item templates
-                 -->
-        <ResourceDictionary Source="Common/StandardStyles.xaml"/>
-      </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="Button">
+      <Style TargetType="Button">
       <Setter Property="Margin" Value="3"/>
         <Setter Property="Width" Value="100"/>
         <Setter Property="Height" Value="50"/>
