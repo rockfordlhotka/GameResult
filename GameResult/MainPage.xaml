@@ -8,6 +8,7 @@
     xmlns:common="using:GameResultRt.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontSize="24"
     mc:Ignorable="d" Margin="-1,0,1,0">
 
   <Page.Resources>
