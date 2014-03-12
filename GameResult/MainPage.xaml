@@ -8,7 +8,7 @@
     xmlns:common="using:GameResultRt.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Margin="-1,0,1,0">
+    mc:Ignorable="d" Margin="-1,0,1,0" FontSize="24">
 
   <Page.Resources>
     <local:DieConverter x:Key="DieConverter" />
