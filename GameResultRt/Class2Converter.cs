@@ -1,11 +1,9 @@
 ﻿using System;
-using Windows.UI;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
 
-namespace GameResult
+namespace GameResultRt
 {
-  public class DamageConverter : IValueConverter
+  public class Class2Converter : IValueConverter
   {
 
 
@@ -16,19 +14,12 @@ namespace GameResult
 
     public object Convert(object value, Type targetType, object parameter, string language)
     {
-      var rv = (int)value;
-      Color result = Colors.Black;
-
-      if (rv < 4)
-        result = HexColor.HexToColor("#4f9d5d");
-      else if (rv < 8)
-        result = HexColor.HexToColor("#2e8b57");
-      else if (rv < 11)
-        result = HexColor.HexToColor("#228b22");
+      var v = (int)value;
+      v = v / 10;
+      if (v == 0)
+        return "-";
       else
-        result = HexColor.HexToColor("#3fff00");
-
-      return new SolidColorBrush(result);
+        return v.ToString(); 
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)

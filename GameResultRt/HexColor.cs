@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using Windows.UI;
 
-namespace GameResult
+namespace GameResultRt
 {
   public class HexColor
   {

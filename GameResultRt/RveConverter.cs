@@ -3,10 +3,11 @@ using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace GameResult
+namespace GameResultRt
 {
-  public class RvConverter : IValueConverter
+  public class RveConverter : IValueConverter
   {
+
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
@@ -18,21 +19,21 @@ namespace GameResult
       var rv = (int)value;
       Color result;
 
-      if (rv < -8)
+      if (rv < -9)
         result = HexColor.HexToColor("#ff4040");
-      else if (rv < -6)
+      else if (rv < -7)
         result = HexColor.HexToColor("#fb607f");
-      else if (rv < -4)
+      else if (rv < -5)
         result = HexColor.HexToColor("#b44668");
-      else if (rv < -2)
+      else if (rv < -3)
         result = HexColor.HexToColor("#de6360");
       else if (rv < 0)
         result = HexColor.HexToColor("#c08081");
       else if (rv < 4)
         result = HexColor.HexToColor("#4f9d5d");
-      else if (rv < 8)
+      else if (rv < 6)
         result = HexColor.HexToColor("#2e8b57");
-      else if (rv < 12)
+      else if (rv < 14)
         result = HexColor.HexToColor("#228b22");
       else
         result = HexColor.HexToColor("#3fff00");
@@ -46,7 +47,7 @@ namespace GameResult
     }
   }
 
-  public class RvLabelConverter : IValueConverter
+  public class RveLabelConverter : IValueConverter
   {
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -57,29 +58,28 @@ namespace GameResult
     public object Convert(object value, Type targetType, object parameter, string language)
     {
       var rv = (int)value;
-      var rvs = Calculator.RVs(rv).ToString();
       string result;
 
-      if (rv < -8)
-        result = "Terrible (" + rvs + " AV/3 rnd)";
-      else if (rv < -6)
-        result = "Horrible (" + rvs + " AV/2 rnd)";
-      else if (rv < -4)
-        result = "Worse (" + rvs + " AV/1 rnd)";
-      else if (rv < -2)
-        result = "Bad (" + rvs + " AV/1 rnd)";
+      if (rv < -9)
+        result = "Terrible (-3 AV/3 rnd)";
+      else if (rv < -7)
+        result = "Horrible (-2 AV/2 rnd)";
+      else if (rv < -5)
+        result = "Worse (-2 AV/1 rnd)";
+      else if (rv < -3)
+        result = "Bad (-1 AV/1 rnd)";
       else if (rv < 0)
-        result = "Fail";
+        result = "Fail (0)";
       else if (rv < 2)
-        result = "Fair (+" + rvs + " SV)";
+        result = "Fair (1)";
       else if (rv < 4)
-        result = "Fair (+" + rvs + " SV)";
-      else if (rv < 8)
-        result = "Good (+" + rvs + " SV)";
-      else if (rv < 12)
-        result = "Great (+" + rvs + " SV)";
+        result = "Fair (2)";
+      else if (rv < 6)
+        result = "Good (3)";
+      else if (rv < 14)
+        result = "Great (" + (rv - 2).ToString() + ")";
       else
-        result = "Superb (+" + rvs + " SV)";
+        result = "Superb (14)";
 
       return result;
     }

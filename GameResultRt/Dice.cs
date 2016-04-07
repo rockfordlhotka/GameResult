@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameResult
+namespace GameResultRt
 {
   public static class Dice
   {

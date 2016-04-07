@@ -2,7 +2,7 @@
 using System.Linq;
 using System.ComponentModel;
 
-namespace GameResult
+namespace GameResultRt
 {
   public class Calculator : INotifyPropertyChanged
   {

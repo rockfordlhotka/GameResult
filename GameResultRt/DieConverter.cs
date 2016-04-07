@@ -3,9 +3,9 @@ using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace GameResult
+namespace GameResultRt
 {
-  public class DamageConverter : IValueConverter
+  public class DieConverter : IValueConverter
   {
 
 
@@ -16,17 +16,19 @@ namespace GameResult
 
     public object Convert(object value, Type targetType, object parameter, string language)
     {
-      var rv = (int)value;
+      var die = (int)value;
       Color result = Colors.Black;
 
-      if (rv < 4)
-        result = HexColor.HexToColor("#4f9d5d");
-      else if (rv < 8)
-        result = HexColor.HexToColor("#2e8b57");
-      else if (rv < 11)
-        result = HexColor.HexToColor("#228b22");
-      else
-        result = HexColor.HexToColor("#3fff00");
+      if (die < -4)
+        result = HexColor.HexToColor("#770f05");
+      else if (die < 0)
+        result = HexColor.HexToColor("#b32d29");
+      else if (die == 0)
+        result = HexColor.HexToColor("#549019");
+      else if (die > 0)
+        result = HexColor.HexToColor("#4fa83d");
+      else if (die > 4)
+        result = HexColor.HexToColor("#7fff00");
 
       return new SolidColorBrush(result);
     }

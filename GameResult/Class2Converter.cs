@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace GameResultRt
+namespace GameResult
 {
   public class Class2Converter : IValueConverter
   {

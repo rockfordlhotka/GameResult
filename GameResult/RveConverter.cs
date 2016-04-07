@@ -3,7 +3,7 @@ using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace GameResultRt
+namespace GameResult
 {
   public class RveConverter : IValueConverter
   {
