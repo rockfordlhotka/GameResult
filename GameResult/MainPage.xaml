@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:GameResult"
-    mc:Ignorable="d" Margin="-1,0,1,0" FontSize="24">
+    mc:Ignorable="d" Margin="-1,0,1,0" FontSize="24" Foreground="White">
 
     <Page.Resources>
         <local:DieConverter x:Key="DieConverter" />
@@ -142,7 +142,7 @@
                             <Button Content="^^^" Click="WeaponMinus3"/>
                             <Button Content="^^" Click="WeaponMinus2"/>
                             <Button Content="^" Click="WeaponMinus1"/>
-                            <Border BorderBrush="Beige">
+                            <Border BorderBrush="Beige" BorderThickness="1">
                                 <TextBlock Text="{Binding Path=PlusSvValue}" HorizontalAlignment="Center"/>
                             </Border>
                             <Button Content="v" Click="WeaponPlus1"/>
@@ -154,7 +154,7 @@
                             <Button Content="^^^" Click="ArmorMinus3"/>
                             <Button Content="^^" Click="ArmorMinus2"/>
                             <Button Content="^" Click="ArmorMinus1"/>
-                            <Border BorderBrush="Beige">
+                            <Border BorderBrush="Beige" BorderThickness="1">
                                 <TextBlock Text="{Binding Path=ArmorValue}" HorizontalAlignment="Center"/>
                             </Border>
                             <Button Content="v" Click="ArmorPlus1"/>
@@ -166,7 +166,7 @@
                             <Button Content="^^^" Click="SvMinus3"/>
                             <Button Content="^^" Click="SvMinus2"/>
                             <Button Content="^" Click="SvMinus1"/>
-                            <Border BorderBrush="Beige">
+                            <Border BorderBrush="Beige" BorderThickness="1">
                                 <TextBlock Text="{Binding Path=SvValue}" HorizontalAlignment="Center"/>
                             </Border>
                             <Button Content="v" Click="SvPlus1"/>
